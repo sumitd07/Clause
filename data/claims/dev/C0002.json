@@ -1,0 +1,52 @@
+{
+  "claim_id": "C0002",
+  "policy_id": "SYNTH-01",
+  "policy": {
+    "start_date": "2023-05-01",
+    "sum_insured": "500000.00",
+    "sum_insured_available": "500000.00",
+    "riders": []
+  },
+  "claimant": {
+    "dob": "1979-11-20",
+    "declared_ped": []
+  },
+  "admission": {
+    "admit_date": "2026-02-10",
+    "discharge_date": "2026-02-14",
+    "room_rent_per_day": "7500.00"
+  },
+  "narrative": "Admitted for laparoscopic appendectomy for acute appendicitis. Patient chose a deluxe single room. Uneventful recovery.",
+  "bill": [
+    {
+      "line_id": "L1",
+      "description": "Deluxe single room, 4 days",
+      "amount": "30000.00"
+    },
+    {
+      "line_id": "L2",
+      "description": "Surgeon and anaesthetist fees",
+      "amount": "12000.00"
+    },
+    {
+      "line_id": "L3",
+      "description": "Nursing charges",
+      "amount": "6000.00"
+    },
+    {
+      "line_id": "L4",
+      "description": "Operation theatre charges",
+      "amount": "20000.00"
+    },
+    {
+      "line_id": "L5",
+      "description": "Pharmacy",
+      "amount": "15000.00"
+    },
+    {
+      "line_id": "L6",
+      "description": "Pre-operative diagnostics",
+      "amount": "8000.00"
+    }
+  ]
+}

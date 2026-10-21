@@ -1,0 +1,44 @@
+{
+  "claim_id": "C0005",
+  "policy_id": "SYNTH-01",
+  "policy": {
+    "start_date": "2022-01-15",
+    "sum_insured": "500000.00",
+    "sum_insured_available": "500000.00",
+    "riders": []
+  },
+  "claimant": {
+    "dob": "1964-07-01",
+    "declared_ped": [
+      "diabetes"
+    ]
+  },
+  "admission": {
+    "admit_date": "2026-08-03",
+    "discharge_date": "2026-08-05",
+    "room_rent_per_day": "4500.00"
+  },
+  "narrative": "Admitted with community-acquired pneumonia. Known diabetic, controlled on oral medication. Treated with IV antibiotics.",
+  "bill": [
+    {
+      "line_id": "L1",
+      "description": "Room charges, 2 days",
+      "amount": "9000.00"
+    },
+    {
+      "line_id": "L2",
+      "description": "Physician visits",
+      "amount": "4000.00"
+    },
+    {
+      "line_id": "L3",
+      "description": "IV antibiotics and medicines",
+      "amount": "6000.00"
+    },
+    {
+      "line_id": "L4",
+      "description": "Chest X-ray and blood cultures",
+      "amount": "3000.00"
+    }
+  ]
+}

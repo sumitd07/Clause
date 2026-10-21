@@ -1,0 +1,186 @@
+{
+  "policy_id": "SYNTH-01",
+  "note": "Fictional rule set for the fictional SYNTH-01 wording. Used by tests and the dev examples.",
+  "calculation_order": [
+    "non_payable",
+    "room_rent",
+    "sub_limit",
+    "copay",
+    "sum_insured_cap"
+  ],
+  "rules": [
+    {
+      "id": "SYN-RR",
+      "type": "room_rent_limit",
+      "title": "Room rent limit with proportionate deduction",
+      "plain": "Room rent is paid up to 1% of your sum insured per day. If you take a costlier room, the doctor's fees, nursing and operation theatre charges are also cut, in the same proportion as the room rent. Medicines, implants and tests are paid in full.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "3.2",
+        "quote": "Room rent is payable up to 1% of the sum insured per day. If the insured person occupies a room with a higher daily rent, the room rent and the associated medical expenses shall be paid in the same proportion as the eligible room rent bears to the actual room rent."
+      },
+      "params": {
+        "limit_type": "percent_si",
+        "value": 1,
+        "proportionate_deduction": true,
+        "associated_categories": [
+          "doctor_fees",
+          "nursing",
+          "ot_charges"
+        ]
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-SL-CATARACT",
+      "type": "sub_limit",
+      "title": "Cataract sub-limit",
+      "plain": "Cataract treatment is paid up to ₹40,000 per hospital stay, whatever the hospital charges.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "3.5",
+        "quote": "Claims for cataract treatment are payable up to Rs 40,000 per hospitalisation."
+      },
+      "params": {
+        "conditions": [
+          "cataract"
+        ],
+        "cap_type": "fixed",
+        "value": 40000
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-WP-INIT",
+      "type": "waiting_period",
+      "title": "Initial 30-day waiting period",
+      "plain": "Nothing is paid for a hospital stay in the first 30 days of the policy, unless it is after an accident.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "4.1",
+        "quote": "No claim is payable for any hospitalisation in the first 30 days from the policy start date, except hospitalisation following an accident."
+      },
+      "params": {
+        "scope": "all",
+        "days": 30,
+        "waived_for_accident": true
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-WP-SPEC",
+      "type": "waiting_period",
+      "title": "Specific waiting period",
+      "plain": "Cataract, hernia and joint replacement are not paid for until the policy is 2 years old.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "4.2",
+        "quote": "Treatment of cataract, hernia and joint replacement is not payable until 24 months (730 days) from the policy start date."
+      },
+      "params": {
+        "scope": "listed_conditions",
+        "days": 730,
+        "conditions": [
+          "cataract",
+          "hernia",
+          "joint_replacement"
+        ]
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-WP-PED",
+      "type": "waiting_period",
+      "title": "Pre-existing disease waiting period",
+      "plain": "A condition you declared when you bought the policy is not paid for until the policy is 3 years old.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "4.3",
+        "quote": "Expenses for any pre-existing disease declared in the proposal are not payable until 36 months (1095 days) from the policy start date."
+      },
+      "params": {
+        "scope": "pre_existing",
+        "days": 1095
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-EX-COSM",
+      "type": "exclusion",
+      "title": "Cosmetic surgery exclusion",
+      "plain": "Cosmetic treatment is not paid for. Reconstruction after an accident or burns is.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "5.1",
+        "quote": "Cosmetic or aesthetic treatment is excluded, unless it is reconstruction following an accident or burns."
+      },
+      "params": {
+        "conditions": [
+          "cosmetic_surgery"
+        ]
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-NP-ITEMS",
+      "type": "non_payable_items",
+      "title": "Non-medical items",
+      "plain": "Non-medical items, such as attendant charges, toiletries, food for attendants and registration, are not paid for.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "5.2",
+        "quote": "Non-medical items such as attendant charges, toiletries, food for attendants and registration charges are not payable."
+      },
+      "params": {
+        "categories": [
+          "non_medical"
+        ]
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-COPAY-SENIOR",
+      "type": "copay",
+      "title": "Senior citizen co-payment",
+      "plain": "If the patient is 61 or older on the day of admission, you pay 20% of every claim yourself.",
+      "status": "approved",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "6.1",
+        "quote": "If the insured person is aged 61 or above on the date of admission, each admissible claim is subject to a co-payment of 20% of the admissible amount."
+      },
+      "params": {
+        "percent": 20,
+        "min_age": 61
+      },
+      "edges": []
+    },
+    {
+      "id": "SYN-END-RR-WAIVER",
+      "type": "waiver",
+      "title": "Room rent waiver rider",
+      "plain": "If you bought the room rent waiver rider, there is no room rent limit: any room is paid as billed.",
+      "status": "approved",
+      "requires_rider": "room_rent_waiver",
+      "citation": {
+        "doc": "SYNTH-01",
+        "section": "E1",
+        "quote": "Where the room rent waiver rider is purchased, clause 3.2 does not apply and room rent is payable as billed."
+      },
+      "params": {},
+      "edges": [
+        {
+          "type": "overrides",
+          "target": "SYN-RR"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "claim_id": "C0003",
+  "status": "approved",
+  "total_payable": "91000.00",
+  "required_rules": [
+    "SYN-END-RR-WAIVER"
+  ],
+  "forbidden_rules": [
+    "SYN-RR"
+  ],
+  "distractor_type": "override",
+  "facts": {
+    "condition_tags": [],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "nursing",
+      "L4": "ot_charges",
+      "L5": "pharmacy",
+      "L6": "diagnostics"
+    }
+  },
+  "notes": "Same claim as C0002 but the room rent waiver rider (E1) is on the policy, so 3.2 does not apply."
+}

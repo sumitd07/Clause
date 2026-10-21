@@ -1,0 +1,47 @@
+{
+  "claim_id": "C0004",
+  "policy_id": "SYNTH-01",
+  "policy": {
+    "start_date": "2023-06-01",
+    "sum_insured": "500000.00",
+    "sum_insured_available": "500000.00",
+    "riders": []
+  },
+  "claimant": {
+    "dob": "1968-03-15",
+    "declared_ped": []
+  },
+  "admission": {
+    "admit_date": "2026-09-15",
+    "discharge_date": "2026-09-16",
+    "room_rent_per_day": "3000.00"
+  },
+  "narrative": "Day-care phacoemulsification with intraocular lens implant for senile cataract, right eye.",
+  "bill": [
+    {
+      "line_id": "L1",
+      "description": "Day care room",
+      "amount": "3000.00"
+    },
+    {
+      "line_id": "L2",
+      "description": "Surgeon fees",
+      "amount": "15000.00"
+    },
+    {
+      "line_id": "L3",
+      "description": "Operation theatre charges",
+      "amount": "30000.00"
+    },
+    {
+      "line_id": "L4",
+      "description": "Medicines and eye drops",
+      "amount": "5000.00"
+    },
+    {
+      "line_id": "L5",
+      "description": "Intraocular lens",
+      "amount": "4000.00"
+    }
+  ]
+}

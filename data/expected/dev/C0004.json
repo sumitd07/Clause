@@ -1,0 +1,27 @@
+{
+  "claim_id": "C0004",
+  "status": "partially_approved",
+  "total_payable": "40000.00",
+  "required_rules": [
+    "SYN-SL-CATARACT"
+  ],
+  "forbidden_rules": [
+    "SYN-WP-SPEC"
+  ],
+  "distractor_type": "near_distractor",
+  "facts": {
+    "condition_tags": [
+      "cataract"
+    ],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "ot_charges",
+      "L4": "pharmacy",
+      "L5": "implants"
+    }
+  },
+  "notes": "Policy in force 1,202 days, so the 730-day cataract waiting period (4.2) has passed and must not be cited. 57,000 billed, capped at 40,000 (3.5)."
+}

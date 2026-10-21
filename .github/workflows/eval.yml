@@ -1,0 +1,40 @@
+# Live model run. Manual only, because it spends API credit.
+# Needs a repository secret named ANTHROPIC_API_KEY (Settings > Secrets and variables > Actions).
+name: eval
+
+on:
+  workflow_dispatch:
+    inputs:
+      arm:
+        description: "Arm to run"
+        type: choice
+        options: [clause, long_context, clause_unreviewed]
+        default: clause
+      split:
+        description: "Claims split (never test before the freeze tag exists)"
+        type: choice
+        options: [dev]
+        default: dev
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      CLAUSE_MODEL: claude-opus-5-5
+      CLAUSE_EFFORT: medium
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: make eval ARM=${{ inputs.arm }} SPLIT=${{ inputs.split }} PY=python
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-${{ inputs.arm }}-${{ inputs.split }}
+          path: eval/results/

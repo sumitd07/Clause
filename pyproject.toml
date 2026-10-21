@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "clause"
+version = "0.1.0"
+description = "Ask what your health insurance policy covers and pays, and see the clause behind every line. AI reads the question; plain code applies the rules."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "Sumit Deshmukh" }]
+keywords = ["llm", "evals", "insurance", "claims", "rules-engine", "document-ai"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["anthropic>=1.17,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "jsonschema>=4.21", "ruff>=0.6"]
+pdf = ["pypdf>=5"]
+
+[project.scripts]
+clause = "clause.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/clause"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "C4", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # the rupee sign and Indian punctuation are intentional

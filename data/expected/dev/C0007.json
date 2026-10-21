@@ -1,0 +1,22 @@
+{
+  "claim_id": "C0007",
+  "status": "route_to_human",
+  "total_payable": null,
+  "required_rules": [
+    "SYN-WP-PED"
+  ],
+  "forbidden_rules": [],
+  "distractor_type": "route",
+  "facts": {
+    "condition_tags": [],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "pharmacy",
+      "L4": "diagnostics"
+    }
+  },
+  "notes": "Day 496 of the policy, inside the 1,095-day pre-existing period (4.3), and the declaration is missing. A human must establish pre-existing status."
+}

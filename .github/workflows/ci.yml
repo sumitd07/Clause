@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Tests
+        run: pytest
+      - name: Rule citations are verbatim
+        run: clause check-rules --rules data/rules/SYNTH-01.rules.json --policy data/policies/SYNTH-01.md
+      - name: Oracle gate (gold facts through the engine must score 100%)
+        run: |
+          clause run --arm oracle --rules data/rules/SYNTH-01.rules.json \
+            --claims data/claims/dev --expected data/expected/dev --out /tmp/oracle
+          clause score --rules data/rules/SYNTH-01.rules.json \
+            --run /tmp/oracle --expected data/expected/dev --min-task-pass 1.0

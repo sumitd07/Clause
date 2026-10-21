@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Model call cache. Reproducible from the same request, and can hold claim text.
+.cache/
+
+# Secrets
+.env
+
+# Insurer documents are fetched locally from data/manifest.csv, never committed (ADR 0007)
+data/policies/raw/
+data/policies/text/
+
+# Run outputs. Commit only the summaries you report (eval/results/<run>/summary.json).
+eval/results/*/decisions/
+eval/results/*/facts/
+eval/results/*/calls.jsonl
+eval/results/*/errors.jsonl
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,26 @@
+{
+  "claim_id": "C0002",
+  "status": "partially_approved",
+  "total_payable": "68333.33",
+  "required_rules": [
+    "SYN-RR"
+  ],
+  "forbidden_rules": [
+    "SYN-END-RR-WAIVER"
+  ],
+  "distractor_type": "conditional",
+  "facts": {
+    "condition_tags": [],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "nursing",
+      "L4": "ot_charges",
+      "L5": "pharmacy",
+      "L6": "diagnostics"
+    }
+  },
+  "notes": "Eligible 5,000/day vs actual 7,500/day, ratio 2/3 applied to room, doctor, nursing and OT (3.2). Pharmacy and diagnostics paid in full. 20,000 + 8,000 + 4,000 + 13,333.33 + 15,000 + 8,000 = 68,333.33."
+}

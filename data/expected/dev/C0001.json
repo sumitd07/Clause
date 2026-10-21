@@ -1,0 +1,26 @@
+{
+  "claim_id": "C0001",
+  "status": "partially_approved",
+  "total_payable": "34000.00",
+  "required_rules": [
+    "SYN-NP-ITEMS"
+  ],
+  "forbidden_rules": [
+    "SYN-RR"
+  ],
+  "distractor_type": "none",
+  "facts": {
+    "condition_tags": [],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "nursing",
+      "L4": "pharmacy",
+      "L5": "diagnostics",
+      "L6": "non_medical"
+    }
+  },
+  "notes": "35,200 billed less 1,200 non-medical (5.2). Room rent 4,000/day is within the 5,000/day limit, so 3.2 must not be cited."
+}

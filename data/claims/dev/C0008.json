@@ -1,0 +1,47 @@
+{
+  "claim_id": "C0008",
+  "policy_id": "SYNTH-01",
+  "policy": {
+    "start_date": "2025-08-01",
+    "sum_insured": "500000.00",
+    "sum_insured_available": "500000.00",
+    "riders": []
+  },
+  "claimant": {
+    "dob": "1980-01-01",
+    "declared_ped": []
+  },
+  "admission": {
+    "admit_date": "2026-05-20",
+    "discharge_date": "2026-05-22",
+    "room_rent_per_day": "3500.00"
+  },
+  "narrative": "Elective laparoscopic inguinal hernia repair.",
+  "bill": [
+    {
+      "line_id": "L1",
+      "description": "Room charges, 2 days",
+      "amount": "7000.00"
+    },
+    {
+      "line_id": "L2",
+      "description": "Surgeon fees",
+      "amount": "10000.00"
+    },
+    {
+      "line_id": "L3",
+      "description": "Operation theatre charges",
+      "amount": "15000.00"
+    },
+    {
+      "line_id": "L4",
+      "description": "Medicines",
+      "amount": "4000.00"
+    },
+    {
+      "line_id": "L5",
+      "description": "Mesh and surgical consumables",
+      "amount": "6000.00"
+    }
+  ]
+}

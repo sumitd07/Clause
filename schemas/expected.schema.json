@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expected.schema.json",
+  "title": "Hand-verified expected outcome for one claim",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "status",
+    "total_payable",
+    "required_rules",
+    "forbidden_rules",
+    "distractor_type",
+    "facts"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "approved",
+        "partially_approved",
+        "rejected",
+        "route_to_human"
+      ]
+    },
+    "total_payable": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+          "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "null only when status is route_to_human"
+    },
+    "required_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Rules that must be cited: each changed the outcome"
+    },
+    "forbidden_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Distractors: citing any of these fails the task"
+    },
+    "distractor_type": {
+      "enum": [
+        "none",
+        "near_distractor",
+        "conditional",
+        "decoy",
+        "override",
+        "route"
+      ]
+    },
+    "facts": {
+      "type": "object",
+      "required": [
+        "condition_tags",
+        "procedure_tags",
+        "is_accident",
+        "line_categories"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "condition_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "procedure_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_accident": {
+          "type": "boolean"
+        },
+        "line_categories": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "room",
+              "icu",
+              "doctor_fees",
+              "nursing",
+              "ot_charges",
+              "pharmacy",
+              "consumables",
+              "implants",
+              "diagnostics",
+              "non_medical",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "The hand calculation, in words. Required for review."
+    }
+  }
+}

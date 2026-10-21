@@ -1,0 +1,24 @@
+{
+  "claim_id": "C0006",
+  "status": "approved",
+  "total_payable": "69000.00",
+  "required_rules": [],
+  "forbidden_rules": [
+    "SYN-EX-COSM",
+    "SYN-WP-INIT"
+  ],
+  "distractor_type": "decoy",
+  "facts": {
+    "condition_tags": [],
+    "procedure_tags": [],
+    "is_accident": true,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "ot_charges",
+      "L4": "pharmacy",
+      "L5": "implants"
+    }
+  },
+  "notes": "Day 20 of the policy, but the initial waiting period (4.1) is waived for accidents. Reconstruction after an accident is carved out of 5.1. Room rent equals the limit exactly."
+}

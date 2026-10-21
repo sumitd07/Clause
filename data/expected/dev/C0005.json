@@ -1,0 +1,24 @@
+{
+  "claim_id": "C0005",
+  "status": "partially_approved",
+  "total_payable": "17600.00",
+  "required_rules": [
+    "SYN-COPAY-SENIOR"
+  ],
+  "forbidden_rules": [
+    "SYN-WP-PED"
+  ],
+  "distractor_type": "conditional",
+  "facts": {
+    "condition_tags": [],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "pharmacy",
+      "L4": "diagnostics"
+    }
+  },
+  "notes": "Age 62 at admission, so the 20% co-pay applies (6.1): 22,000 less 4,400. Diabetes is a declared pre-existing disease but it is a comorbidity here, and the 1,095-day period has passed anyway."
+}

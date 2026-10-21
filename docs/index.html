@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clause</title>
+<meta name="description" content="Clause answers questions about Indian health insurance policies in plain words, and shows the clause behind every line. Work in progress.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<style>
+/* Layout: one reading column, like a policy schedule; the answer form is set as a printed statement. */
+:root {
+  --paper: #f4f6f5;
+  --sheet: #ffffff;
+  --ink: #17211e;
+  --muted: #55625d;
+  --rule: #d5ddd9;
+  --stamp: #0b6e5b;
+  --stamp-soft: #e1efea;
+  --yes: #0b6e5b;
+  --partly: #9a5b00;
+  --no: #b3261e;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1513; --sheet: #161e1b; --ink: #e4ebe8; --muted: #9db0a9; --rule: #2b3833;
+    --stamp: #5cc9ab; --stamp-soft: #193029; --yes: #5cc9ab; --partly: #e3a64a; --no: #f08a80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1513; --sheet: #161e1b; --ink: #e4ebe8; --muted: #9db0a9; --rule: #2b3833;
+  --stamp: #5cc9ab; --stamp-soft: #193029; --yes: #5cc9ab; --partly: #e3a64a; --no: #f08a80;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--stamp); text-underline-offset: 0.15em; }
+a:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; border-radius: 2px; }
+h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.1rem, 6vw, 3.1rem); letter-spacing: -0.01em; }
+h2 { font-size: 1.6rem; }
+p { margin: 0; }
+.ref {
+  font-family: var(--mono); font-size: 0.8em; white-space: nowrap;
+  background: var(--stamp-soft); color: var(--stamp); padding: 0.05em 0.4em; border-radius: 3px;
+}
+
+header.top { padding-block: 20px; border-bottom: 1px solid var(--rule); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { font-family: var(--display); font-size: 1.35rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.wip {
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid var(--partly); color: var(--partly); padding: 2px 8px; border-radius: 3px;
+}
+
+main .wrap { display: grid; gap: 56px; padding-block: 48px 64px; }
+section { display: grid; gap: 16px; min-width: 0; }
+.lede { font-size: 1.2rem; color: var(--muted); max-width: 38rem; }
+.hero { gap: 18px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.button {
+  display: inline-block; font-weight: 500; text-decoration: none; padding: 10px 16px; border-radius: 4px;
+  border: 1px solid var(--stamp);
+}
+.button.solid { background: var(--stamp); color: var(--sheet); }
+.button.plain { color: var(--stamp); }
+
+/* The chatbot answer against the real answer */
+.compare { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; }
+.card { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; display: grid; gap: 10px; min-width: 0; }
+.label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.q { font-style: italic; }
+.big-yes { font-family: var(--display); font-size: 2.4rem; line-height: 1; color: var(--yes); }
+.card ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+
+.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.points li { padding-left: 22px; position: relative; }
+.points li::before { content: ""; position: absolute; left: 2px; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--stamp); }
+
+/* The answer form, as a printed statement */
+.statement {
+  background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--stamp); border-radius: 4px;
+  font-family: var(--mono); font-size: 0.86rem; line-height: 1.55; overflow-x: auto;
+}
+.statement .row { display: grid; grid-template-columns: 9.5rem 1fr; gap: 12px; padding: 12px 18px; border-bottom: 1px dashed var(--rule); }
+.statement .row:last-child { border-bottom: 0; }
+.statement .k { color: var(--muted); }
+.statement .v { min-width: 0; }
+.statement .v p + p { margin-top: 4px; }
+.pill { font-weight: 500; }
+.pill.partly { color: var(--partly); }
+.quote { color: var(--muted); }
+.caption { font-size: 0.9rem; color: var(--muted); }
+
+.steps { margin: 0; padding-left: 1.4em; display: grid; gap: 12px; }
+.steps li::marker { font-family: var(--display); font-weight: 600; color: var(--stamp); }
+
+.scope { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.scope h3 { font-size: 1rem; margin: 0; }
+.scope ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 0.97rem; }
+.in h3 { color: var(--yes); }
+.out h3 { color: var(--no); }
+
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.plan li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 12px; padding-block: 10px; border-bottom: 1px solid var(--rule); }
+.plan .when { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); padding-top: 2px; }
+.plan .done .when { color: var(--yes); }
+
+footer { border-top: 1px solid var(--rule); padding-block: 24px 32px; color: var(--muted); font-size: 0.9rem; }
+footer .wrap { display: grid; gap: 6px; }
+
+@media (max-width: 640px) {
+  .compare, .scope { grid-template-columns: 1fr; }
+  .statement .row { grid-template-columns: 1fr; gap: 2px; }
+  .plan li { grid-template-columns: 1fr; gap: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="https://github.com/sumitd07/clause">Clause</a>
+    <span class="wip">Work in progress</span>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="hero">
+      <h1>What will my health insurance actually pay?</h1>
+      <p class="lede">Clause answers questions about Indian health insurance policies in plain words. Every line of the answer shows the part of your policy it comes from.</p>
+      <div class="actions">
+        <a class="button solid" href="https://github.com/sumitd07/clause">See the code on GitHub</a>
+        <a class="button plain" href="https://github.com/sumitd07/clause/blob/main/docs/PRODUCT.md">Read the product plan</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>The problem</h2>
+      <div class="compare">
+        <div class="card">
+          <span class="label">Ask a chatbot</span>
+          <p class="q">"Is my mother's cataract surgery covered?"</p>
+          <p class="big-yes">Yes.</p>
+        </div>
+        <div class="card">
+          <span class="label">What the policy actually says</span>
+          <p>Yes, but:</p>
+          <ul>
+            <li>only after the policy is 2 years old <span class="ref">section 4.2</span></li>
+            <li>only up to ₹40,000 <span class="ref">section 3.5</span></li>
+            <li>and you get less back if the room costs more than the limit <span class="ref">section 3.2</span></li>
+          </ul>
+        </div>
+      </div>
+      <p>Those three conditions sit on three different pages of a 30 to 80 page policy. Miss one and the family gets a surprise bill at discharge.</p>
+    </section>
+
+    <section>
+      <h2>What Clause does differently</h2>
+      <ul class="points">
+        <li>It writes down every rule in the policy once, ahead of time, and a person checks the list.</li>
+        <li>For each question, it goes through every rule on that list.</li>
+        <li>Ordinary code works out the money. The AI never does the maths.</li>
+        <li>Every answer quotes the policy's own words.</li>
+        <li>When it can't tell, it says what is missing and asks the one question that would settle it.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What an answer looks like</h2>
+      <p>Every answer about a treatment has the same parts, in the same order. This one is real output from the code, on a made-up test policy.</p>
+      <div class="statement" role="group" aria-label="Example answer">
+        <div class="row"><span class="k">Is it covered?</span><div class="v"><p><span class="pill partly">Partly.</span> The policy pays ₹40,000 of ₹57,000.</p></div></div>
+        <div class="row"><span class="k">From when?</span><div class="v"><p>Covered from 31 May 2025, when the 2-year waiting period for cataract (section 4.2) ended.</p></div></div>
+        <div class="row"><span class="k">Limits</span><div class="v"><p>Cap: cataract is paid up to ₹40,000 (section 3.5).</p><p>Room rent: up to ₹5,000 a day. Your room is ₹3,000 a day, within the limit.</p><p>No co-payment: it starts at age 61, and the patient is 58.</p></div></div>
+        <div class="row"><span class="k">What you pay</span><div class="v"><p>The policy pays ₹40,000. You pay ₹17,000, because of the cap for cataract.</p></div></div>
+        <div class="row"><span class="k">Where this comes from</span><div class="v"><p class="quote">Section 3.5: "Claims for cataract treatment are payable up to Rs 40,000 per hospitalisation."</p><p>In plain words: cataract treatment is paid up to ₹40,000 per hospital stay, whatever the hospital charges.</p></div></div>
+      </div>
+      <p class="caption">The full answer also shows what Clause understood from your question, so you can correct it, and a line-by-line bill when you give the amounts. No AI writes the answer. Code fills it in from the rules.</p>
+    </section>
+
+    <section>
+      <h2>How you'll use it</h2>
+      <ol class="steps">
+        <li><strong>Ask your question.</strong> Nothing else is needed to start.</li>
+        <li><strong>Clause asks only what that question needs,</strong> such as the policy's start date or the patient's age.</li>
+        <li><strong>Upload your policy schedule to fill those in,</strong> the PDF your insurer emails you. You check what it read.</li>
+        <li><strong>Get the answer.</strong> Your policies are remembered on your computer, so the next question is just a question.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>The first version</h2>
+      <div class="scope">
+        <div class="card in">
+          <h3>In</h3>
+          <ul>
+            <li>Questions about a treatment, or a term in your policy</li>
+            <li>Which of two policies to claim from first, such as your company's and your own</li>
+            <li>The patient's details, such as a parent with a co-payment</li>
+            <li>5 real policies, or your own policy wording uploaded</li>
+            <li>Runs on your computer</li>
+          </ul>
+        </div>
+        <div class="card out">
+          <h3>Not yet</h3>
+          <ul>
+            <li>Prescriptions, bills or other medical papers; you type the facts instead</li>
+            <li>Checking the cuts on a settlement letter</li>
+            <li>Photos or scans of papers</li>
+            <li>Follow-up questions, or languages other than English</li>
+            <li>An online app</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How we'll know it works</h2>
+      <p>Clause is tested against Claude given the whole policy, on 60 questions whose answers are worked out by hand and fixed before any system sees them. An answer counts only if the verdict, the amount to the rupee and the clauses it names are all right. Wrong answers given with confidence are counted on their own, because those are the ones people act on. If Claude does as well as Clause, we'll say so.</p>
+    </section>
+
+    <section>
+      <h2>Where it stands</h2>
+      <ul class="plan">
+        <li class="done"><span class="when">Done</span><span>The code that applies the rules, the answer form, a made-up test policy, and 58 tests</span></li>
+        <li><span class="when">Week 1</span><span>Real policies, and their rules written down by hand</span></li>
+        <li><span class="when">Week 2</span><span>The test questions, fixed; the AI that writes down rules, and a person checking them</span></li>
+        <li><span class="when">Week 3</span><span>Asking only what's needed, schedule upload, and two policies</span></li>
+        <li><span class="when">Week 4</span><span>The comparison with Claude, the results, and a simple page to ask questions</span></li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Clause is not the insurer's decision, and not legal or financial advice.</p>
+    <p>All test questions are made up. No real patient data is used. Code under the MIT license.</p>
+  </div>
+</footer>
+</body>
+</html>

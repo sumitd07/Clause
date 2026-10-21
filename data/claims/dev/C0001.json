@@ -1,0 +1,52 @@
+{
+  "claim_id": "C0001",
+  "policy_id": "SYNTH-01",
+  "policy": {
+    "start_date": "2024-01-10",
+    "sum_insured": "500000.00",
+    "sum_insured_available": "500000.00",
+    "riders": []
+  },
+  "claimant": {
+    "dob": "1986-04-02",
+    "declared_ped": []
+  },
+  "admission": {
+    "admit_date": "2026-03-05",
+    "discharge_date": "2026-03-08",
+    "room_rent_per_day": "4000.00"
+  },
+  "narrative": "Admitted with high fever and low platelets; diagnosed with dengue fever. Treated conservatively and discharged stable.",
+  "bill": [
+    {
+      "line_id": "L1",
+      "description": "Room charges, twin sharing, 3 days",
+      "amount": "12000.00"
+    },
+    {
+      "line_id": "L2",
+      "description": "Consultant physician visits",
+      "amount": "6000.00"
+    },
+    {
+      "line_id": "L3",
+      "description": "Nursing charges",
+      "amount": "3000.00"
+    },
+    {
+      "line_id": "L4",
+      "description": "Medicines and IV fluids",
+      "amount": "8000.00"
+    },
+    {
+      "line_id": "L5",
+      "description": "Platelet count and blood tests",
+      "amount": "5000.00"
+    },
+    {
+      "line_id": "L6",
+      "description": "Attendant food and toiletries kit",
+      "amount": "1200.00"
+    }
+  ]
+}

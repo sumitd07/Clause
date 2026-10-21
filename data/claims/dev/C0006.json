@@ -1,0 +1,47 @@
+{
+  "claim_id": "C0006",
+  "policy_id": "SYNTH-01",
+  "policy": {
+    "start_date": "2026-04-01",
+    "sum_insured": "500000.00",
+    "sum_insured_available": "500000.00",
+    "riders": []
+  },
+  "claimant": {
+    "dob": "1995-09-09",
+    "declared_ped": []
+  },
+  "admission": {
+    "admit_date": "2026-04-21",
+    "discharge_date": "2026-04-24",
+    "room_rent_per_day": "5000.00"
+  },
+  "narrative": "Road traffic accident with facial laceration and fractured cheekbone. Underwent open reduction and reconstruction of the cheekbone. The surgeon notes the procedure is reconstructive and not cosmetic.",
+  "bill": [
+    {
+      "line_id": "L1",
+      "description": "Room charges, 3 days",
+      "amount": "15000.00"
+    },
+    {
+      "line_id": "L2",
+      "description": "Plastic surgeon and anaesthetist fees",
+      "amount": "10000.00"
+    },
+    {
+      "line_id": "L3",
+      "description": "Operation theatre charges",
+      "amount": "25000.00"
+    },
+    {
+      "line_id": "L4",
+      "description": "Medicines",
+      "amount": "7000.00"
+    },
+    {
+      "line_id": "L5",
+      "description": "Titanium plates and screws",
+      "amount": "12000.00"
+    }
+  ]
+}

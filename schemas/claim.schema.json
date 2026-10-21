@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim.schema.json",
+  "title": "Claim file",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "policy_id",
+    "policy",
+    "claimant",
+    "admission",
+    "narrative",
+    "bill"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "pattern": "^C\\d{4,}$"
+    },
+    "policy_id": {
+      "type": "string"
+    },
+    "policy": {
+      "type": "object",
+      "required": [
+        "start_date",
+        "sum_insured",
+        "sum_insured_available"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "sum_insured": {
+          "type": "string",
+          "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+          "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+        },
+        "sum_insured_available": {
+          "type": "string",
+          "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+          "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+        },
+        "riders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "claimant": {
+      "type": "object",
+      "required": [
+        "dob",
+        "declared_ped"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "dob": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "declared_ped": {
+          "description": "Declared pre-existing diseases as condition tags. null means the declaration is missing.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "admission": {
+      "type": "object",
+      "required": [
+        "admit_date",
+        "discharge_date",
+        "room_rent_per_day"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "admit_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "discharge_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "room_rent_per_day": {
+          "type": "string",
+          "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+          "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+        }
+      }
+    },
+    "narrative": {
+      "type": "string",
+      "minLength": 10,
+      "description": "What the person typed about the treatment, in their own words: the condition, the treatment, and anything else they know."
+    },
+    "bill": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "line_id",
+          "description",
+          "amount"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "line_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+            "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+          }
+        }
+      },
+      "description": "The hospital's estimate or bill, as the person typed it. Empty when they asked about cover without amounts."
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "decision.schema.json",
+  "title": "Decision produced by any arm",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "arm",
+    "status",
+    "total_billed",
+    "total_payable"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "arm": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "approved",
+        "partially_approved",
+        "rejected",
+        "route_to_human"
+      ]
+    },
+    "total_billed": {
+      "type": "string",
+      "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+      "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+    },
+    "total_payable": {
+      "type": "string",
+      "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+      "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "line_id",
+          "category",
+          "billed",
+          "payable",
+          "adjustments"
+        ],
+        "properties": {
+          "line_id": {
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "room",
+              "icu",
+              "doctor_fees",
+              "nursing",
+              "ot_charges",
+              "pharmacy",
+              "consumables",
+              "implants",
+              "diagnostics",
+              "non_medical",
+              "other"
+            ]
+          },
+          "billed": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+            "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+          },
+          "payable": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+            "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+          },
+          "adjustments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "step",
+                "amount",
+                "rule_id",
+                "note"
+              ],
+              "properties": {
+                "step": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "string",
+                  "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+                  "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+                },
+                "rule_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "claim_adjustments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "step",
+          "amount",
+          "rule_id",
+          "note"
+        ],
+        "properties": {
+          "step": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d{1,2})?$",
+            "description": "Rupees as a decimal string, e.g. \"12000.00\". Strings avoid float rounding."
+          },
+          "rule_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "applied_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cited_sections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arms A and B cite sections; the scorer maps them to rule ids"
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "route_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

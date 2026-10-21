@@ -1,0 +1,27 @@
+{
+  "claim_id": "C0008",
+  "status": "rejected",
+  "total_payable": "0.00",
+  "required_rules": [
+    "SYN-WP-SPEC"
+  ],
+  "forbidden_rules": [
+    "SYN-WP-INIT"
+  ],
+  "distractor_type": "none",
+  "facts": {
+    "condition_tags": [
+      "hernia"
+    ],
+    "procedure_tags": [],
+    "is_accident": false,
+    "line_categories": {
+      "L1": "room",
+      "L2": "doctor_fees",
+      "L3": "ot_charges",
+      "L4": "pharmacy",
+      "L5": "consumables"
+    }
+  },
+  "notes": "Day 292 of the policy, inside the 730-day specific waiting period for hernia (4.2). The 30-day initial period has passed."
+}
